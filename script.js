@@ -1,19 +1,24 @@
 let timeOut = null;
+let isPlayed = false;
 const barHolder = document.getElementsByClassName("bar-holder");
 const bars = barHolder[0].querySelectorAll("div");
+const timer = () => {
+    for (const bar of bars) {
+        bar.style.height = `${Math.floor(Math.random() * 100)}%`;
+    }
+}
 
 const play = () => {
-    const timer = () => {
-        for (const bar of bars) {
-            bar.style.height = `${Math.floor(Math.random() * 100)}%`;
-        }
+    if (!isPlayed){
+        timeOut = setInterval(timer, 1000);
+        isPlayed = true;
     }
-    timeOut = setInterval(timer, 1000);
 }
 
 const pause = () => {
     if (timeOut) {
         clearInterval(timeOut);
+        isPlayed = false;
     }
 }
 
