@@ -93,25 +93,22 @@
     </div>
 
     <script>
-        const timersArray = [];
+        let timeOut = null;
+        const barHolder = document.getElementsByClassName("bar-holder");
+        const bars = barHolder[0].querySelectorAll("div");
+
         const play = () => {
-            const barHolder = document.getElementsByClassName("bar-holder");
-            const bars = barHolder[0].querySelectorAll("div");
-            let timer = null;
-            for (const bar of bars) {
-                timer = () => {
+            const timer = () => {
+                for (const bar of bars) {
                     bar.style.height = `${Math.floor(Math.random() * 100)}%`;
                 }
-                const timeOut = setInterval(timer, 1000);
-                timersArray.push(timeOut);
             }
+            timeOut = setInterval(timer, 1000);
         }
 
         const pause = () => {
-            if (timersArray) {
-                for (const timeOut of timersArray) {
-                    clearInterval(timeOut);
-                }
+            if (timeOut) {
+                clearInterval(timeOut);
             }
         }
 
